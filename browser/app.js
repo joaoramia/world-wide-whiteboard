@@ -1,8 +1,8 @@
 var socket = io(window.location.origin);
 
 whiteboard.on('draw', function (start, end, color) {
-    console.log(start, end, color);
-    socket.emit('afterdraw', {start: start, end: end, strokeColor: color});
+    // console.log(start, end, color);
+    socket.emit('ondraw', {start: start, end: end, strokeColor: color});
 });
 
 socket.on('connect', function () {

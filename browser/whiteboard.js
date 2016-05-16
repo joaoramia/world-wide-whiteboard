@@ -4,6 +4,7 @@ window.whiteboard = new window.EventEmitter();
 
     // Ultimately, the color of our stroke;
     var color;
+    var isWhite = false;
 
     // The color selection elements on the DOM.
     var colorElements = [].slice.call(document.querySelectorAll('.marker'));
@@ -33,10 +34,11 @@ window.whiteboard = new window.EventEmitter();
     canvas.height = parseInt(sketchStyle.getPropertyValue('height'));
 
     var ctx = canvas.getContext('2d');
+    console.log(document.querySelector('.selected').id);
 
-    ctx.lineWidth = 5;
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
+    ctx.lineWidth = 20;
+    ctx.lineJoin = 'miter';
+    ctx.lineCap = 'miter';
 
     var currentMousePosition = {
         x: 0,
@@ -79,6 +81,16 @@ window.whiteboard = new window.EventEmitter();
         // Draw the line between the start and end positions
         // that is colored with the given color.
         ctx.beginPath();
+        if (strokeColor === 'white'){
+            ctx.lineWidth = 50;
+            ctx.lineJoin = 'bevel';
+            ctx.lineCap = 'bevel'; 
+        }
+        else {
+            ctx.lineWidth = 20;
+            ctx.lineJoin = 'bevel';
+            ctx.lineCap = 'bevel';    
+        }
         ctx.strokeStyle = strokeColor || 'black';
         ctx.moveTo(start.x, start.y);
         ctx.lineTo(end.x, end.y);

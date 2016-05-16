@@ -18,9 +18,8 @@ io.on('connection', function (socket) {
     console.log(socket.id);
 	socket.on('disconnect', function () {
 	    console.log('disconneceted :<(');
-	    // io.emit(';( sad smiley face');
 	});
-	socket.on('afterdraw', function(data){
+	socket.on('ondraw', function(data){
 		socket.broadcast.emit('drawdata', data);
 	});
 });
